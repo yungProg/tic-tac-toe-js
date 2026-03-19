@@ -65,6 +65,7 @@ function GameController() {
     console.log("Welcome");
     
     const board = GameBoard();
+    const flattenedBoard = board.getBoard().flat().map(cell => cell.getValue())
 
     const player1 = PlayerFactory("Player 1", "X");
     const player2 = PlayerFactory("Player 2", "O");
@@ -85,5 +86,37 @@ function GameController() {
         console.log(`${getActivePlayer().name}'s turn to make a move`);
     }
 
-    return {playRound, addToken};
+    const isDraw = () => {
+        return !flattenedBoard.some(cell => cell == "*")
+    }
+
+    const isWon = () => {
+        let pattern = [[0,1,2],[0,3,6],[0,4,8],[1,4,7],[2,5,8],[2,4,6],[3,4,5],[6,7,8]]
+
+        for (let i = 0; i < pattern.length; i++) {
+            let checkingPattern = [
+                flattenedBoard[pattern[i][0]], flattenedBoard[pattern[i][1], flattenedBoard[pattern[i][0]]]
+            ];
+            let hasWon = checkingPattern.every(token => token == getActivePlayer().token)
+            
+            if (hasWon) {
+                return true
+            }
+        }
+        return false
+    }
+
+    const isGameOver = () => {
+        if (isWon()) {
+            console.log(`${getActivePlayer().name} has won!`);
+            return true
+        } else if (isDraw()) {
+            console.log("Draw!");
+            return true
+        }
+    }
+
+    return {playRound, addToken, isGameOver};
 }
+
+const game = GameController();

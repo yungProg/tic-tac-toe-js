@@ -7,6 +7,32 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+    <div class="container">
+        <h1>TIC TAC TOE</h1>
+        <form action="">
+            <div>
+                <label for="player1">First player's name</label><br>
+                <input type="text" name="player1" id="player1">
+            </div>
+            <div>
+                <label for="player2">Second player's name</label><br>
+                <input type="text" name="player2" id="player2">
+            </div>
+            <button type="submit" class="submit">Start Game</button>
+        </form>
+        <div class="info">
+            <div class="scores">
+                <h2>Scores</h2>
+                <p class="score1"></p>
+                <p class="score2"></p>
+            </div>
+            <div class="outcome">
+                <p class="results"></p>
+                <button type="button" class="replay-btn">Replay</button>
+            </div>
+        </div>
+        <div class="game-board"></div>
+    </div>
     <script src="scripts/script.js"></script>
 </body>
 </html>
